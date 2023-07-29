@@ -31,6 +31,9 @@ class Employee(models.Model):
     def full_name(self):
         return f"{self.name} {self.last_name}"
 
+    def __str__(self):
+        return self.full_name + " - " + self.email
+
 
 class Restaurant(models.Model):
     TEXT_PREVIEW_LENGTH = 30
@@ -73,6 +76,9 @@ class Menu(models.Model):
     def name(self):
         return self.restaurant.name + " " + str(self.date)
 
+    def __str__(self):
+        return self.name
+
 
 class Vote(models.Model):
     user = models.ForeignKey(
@@ -83,4 +89,4 @@ class Vote(models.Model):
     )
 
     def __str__(self):
-        return f"{self.user.full_name} voted for {self.menu.restaurant} - {self.menu.date}"
+        return f"{self.user.full_name} voted for {self.menu}"

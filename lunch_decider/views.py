@@ -1,14 +1,27 @@
 import datetime
 
 from rest_framework import viewsets, status, generics, versioning
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly, IsAdminUser
+from rest_framework.permissions import (
+    IsAuthenticated,
+    IsAuthenticatedOrReadOnly
+)
 from rest_framework.response import Response
 
 from lunch_decider.models import Restaurant, Menu, Employee, Vote
 from lunch_decider.permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
-from lunch_decider.serializers import RestaurantSerializer, RestaurantListSerializer, RestaurantDetailSerializer, \
-    MenuDetailSerializer, MenuSerializer, VoteMenuSerializer, EmployeeSerializer, EmployeeListSerializer, \
-    EmployeeDetailSerializer, VoteSerializerV2, VoteSerializerV1
+from lunch_decider.serializers import (
+    RestaurantSerializer,
+    RestaurantListSerializer,
+    RestaurantDetailSerializer,
+    MenuDetailSerializer,
+    MenuSerializer,
+    VoteMenuSerializer,
+    EmployeeSerializer,
+    EmployeeListSerializer,
+    EmployeeDetailSerializer,
+    VoteSerializerV2,
+    VoteSerializerV1
+)
 
 
 class EmployeeViewView(viewsets.ModelViewSet):
@@ -111,4 +124,3 @@ class TopMenuView(generics.ListAPIView):
     def get_queryset(self):
         today = datetime.date.today()
         return Menu.objects.filter(date=today).order_by("-votes")[:1]
-
